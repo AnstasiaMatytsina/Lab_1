@@ -16,6 +16,7 @@ private:
     void checkSize();
 public:
     FileChecker();
+    static FileChecker* Instance();//синглтон
     void add(const QString &filePath);
     void remove(int position);
     void check();

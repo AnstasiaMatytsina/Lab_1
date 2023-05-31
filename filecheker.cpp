@@ -4,6 +4,11 @@
 
 using namespace std;
 
+FileChecker* FileChecker:: Instance(){
+    static FileChecker instance;
+    return &instance;
+}
+
 void FileChecker::changeStateByPosition(const State &newState, int position) {
     save[position] = newState;
 }
