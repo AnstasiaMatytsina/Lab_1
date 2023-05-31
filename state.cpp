@@ -3,8 +3,8 @@
 State::State(const QString &filePath) {
     QFileInfo info(filePath);
     path=info.absoluteFilePath();
-    size=info.size();
     exist=info.exists();
+    size=info.size();
 }
 
 QString State::getPath(){
