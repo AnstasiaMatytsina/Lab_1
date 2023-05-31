@@ -10,7 +10,8 @@ private:
     QString path;
     bool exist;
 public:
-    State(const QString &filePath);
+    State() = default;
+    explicit State(const QString &filePath);
     QString getPath();
     bool getExist();
     qint64 getSize();
