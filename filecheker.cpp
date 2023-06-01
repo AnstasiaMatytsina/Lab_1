@@ -4,15 +4,17 @@
 
 using namespace std;
 
-FileChecker* FileChecker:: Instance(){
-    static FileChecker instance;
-    return &instance;
+//Подключаем сигналы в слоты
+FileChecker::FileChecker()
+{
+    connect(this, &FileChecker::existSignal, &ConsolePrinter::printerByExist);
+    connect(this, &FileChecker::sizeSignal, &ConsolePrinter::printerBySize);
 }
 
 void FileChecker::changeStateByPosition(const State &newState, int position) {
     save[position] = newState;
 }
-
+//Сравниваем текущее состояние с последним сохраненным
 void FileChecker::checkExistByPosition(int position) {
     State savedState = save[position];
     State newState(savedState.getPath());
@@ -30,17 +32,11 @@ void FileChecker::checkSizeByPosition(int position) {
         changeStateByPosition(newState, position);
     }
 }
-
+//Идем по вектору и вызываем функцию для проверки изменений
 void FileChecker::checkSize() {
     for(int pos = 0; pos < save.count(); pos++) {
         checkSizeByPosition(pos);
     }
-}
-
-FileChecker::FileChecker()
-{
-    connect(this, &FileChecker::existSignal, &ConsolePrinter::printerByExist);
-    connect(this, &FileChecker::sizeSignal, &ConsolePrinter::printerBySize);
 }
 
 void FileChecker::add(const QString &filePath) {
@@ -56,7 +52,7 @@ void FileChecker::check() {
     checkExist();
     checkSize();
 }
-
+//Идем по вектору и вызываем функцию для проверки изменений
 void FileChecker::checkExist() {
     for(int pos = 0; pos < save.count(); pos++) {
         checkExistByPosition(pos);

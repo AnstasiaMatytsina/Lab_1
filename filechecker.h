@@ -16,10 +16,10 @@ private:
     void checkSize();
 public:
     FileChecker();
-    static FileChecker* Instance();//синглтон
     void add(const QString &filePath);
     void remove(int position);
     void check();
+//сигналы
 signals:
     void existSignal(const QString& path, bool existence);
     void sizeSignal(const QString& path, qint64 size);
