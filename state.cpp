@@ -1,7 +1,7 @@
 #include "state.h"
 
 State::State(const QString &filePath) {
-    QFileInfo info(filePath);
+    QFileInfo info(filePath);//вызываем конструктор с параметром
     path=info.absoluteFilePath();
     exist=info.exists();
     size=info.size();
@@ -17,4 +17,10 @@ bool State::getExist(){
 
 qint64 State::getSize(){
     return size;
+}
+bool State::operator==(const State& file)const {   // перегрузка оператора сравнения
+
+    if (file.path == path)
+        return true;
+    return false;
 }
