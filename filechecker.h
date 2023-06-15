@@ -17,8 +17,9 @@ private:
 public:
     FileChecker();
     void add(const QString &filePath);
-    void remove(int position);
+    bool remove(const QString &filePath);
     void check();
+//сигналы
 signals:
     void existSignal(const QString& path, bool existence);
     void sizeSignal(const QString& path, qint64 size);
@@ -26,3 +27,4 @@ signals:
 
 
 #endif // FILECHEKER_H
+

@@ -15,6 +15,7 @@ public:
     QString getPath();
     bool getExist();
     qint64 getSize();
+    bool operator==(const State& file)const;
 };
 
 

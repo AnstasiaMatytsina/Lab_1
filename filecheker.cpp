@@ -16,7 +16,7 @@ void FileChecker::checkExistByPosition(int position) {
         changeStateByPosition(newState, position);
     }
 }
-
+//Сравниваем старое состояние с текущим, если изменения есть подаем сигнал и меняем состояние в векторе
 void FileChecker::checkSizeByPosition(int position) {
     State savedState = save[position];
     State newState(savedState.getPath());
@@ -25,7 +25,7 @@ void FileChecker::checkSizeByPosition(int position) {
         changeStateByPosition(newState, position);
     }
 }
-
+//Идем по фектору и вызываем функцию для проверки изменений
 void FileChecker::checkSize() {
     for(int pos = 0; pos < save.count(); pos++) {
         checkSizeByPosition(pos);
@@ -43,8 +43,13 @@ void FileChecker::add(const QString &filePath) {
     save.push_back(newState);
 }
 
-void FileChecker::remove(int position) {
-    save.remove(position);
+bool FileChecker::remove(const QString &filePath) {
+    State remstate(filePath);
+    if(save.contains(remstate) ){
+        save.removeOne(remstate);
+        return true;
+    }
+    else return false;
 }
 
 void FileChecker::check() {
@@ -57,3 +62,4 @@ void FileChecker::checkExist() {
         checkExistByPosition(pos);
     }
 }
+
